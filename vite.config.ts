@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: "./src/index.ts",
+      entry: "./src/main.ts",
       name: "ToastLibrary",
       fileName: "toast-library",
       formats: ["umd", "es"],
