@@ -111,7 +111,7 @@ function HomePage() {
           <div className="grid grid-cols-2 gap-4">
             <button
               onClick={() => notify(
-                customMessage || "Default success message", 
+                customMessage || "Default message", 
                 selectedType,
                 selectedType === 'loading' ? 0 : 4000
               )}
