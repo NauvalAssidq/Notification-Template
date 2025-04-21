@@ -1,54 +1,166 @@
-# React + TypeScript + Vite
+# Toast Notification Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight, customizable toast notification system for React applications with TypeScript support.
 
-Currently, two official plugins are available:
+![Toast notifications demo](https://via.placeholder.com/800x400.png?text=Toast+Notifications+Demo)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Multiple Notification Types** - Success, error, warning, info, and loading states with appropriate styling and icons
+- **Smart Duration Control** - Context-aware timing with customizable durations
+- **Simple Hook API** - Easy integration with any React component
+- **TypeScript Support** - Full type definitions for better development experience
+- **Customizable Design** - Modern UI with smooth animations and responsive layout
+- **Auto-dismissal** - Notifications disappear automatically based on type and importance
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install toast-notification-library
+# or
+yarn add toast-notification-library
+# or
+pnpm add toast-notification-library
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Quick Start
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Wrap your application with the ToastProvider
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```tsx
+// main.tsx or App.tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ToastProvider } from "toast-notification-library";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <ToastProvider>
+      <App />
+    </ToastProvider>
+  </React.StrictMode>
+);
 ```
+
+### 2. Use the hook in your components
+
+```tsx
+import { useToast } from "toast-notification-library";
+
+function MyComponent() {
+  const { notify } = useToast();
+  
+  const handleClick = () => {
+    // Basic usage
+    notify("Operation completed successfully", "success");
+    
+    // With custom duration (in milliseconds)
+    notify("Unable to connect to server", "error", 6000);
+    
+    // Persistent notification (0 duration)
+    notify("Processing your request...", "loading", 0);
+  };
+  
+  return (
+    <button onClick={handleClick}>
+      Show Notification
+    </button>
+  );
+}
+```
+
+## API Reference
+
+### ToastProvider
+
+Wrap your application with this provider to enable toast notifications.
+
+```tsx
+<ToastProvider>
+  {children}
+</ToastProvider>
+```
+
+### useToast Hook
+
+```tsx
+const { notify } = useToast();
+```
+
+#### `notify` function
+
+```tsx
+notify(message: string, type: ToastType, duration?: number): string
+```
+
+- `message`: The text content of the notification
+- `type`: One of `"success"`, `"error"`, `"warning"`, `"info"`, or `"loading"`
+- `duration`: Time in milliseconds before auto-dismissal (default varies by type)
+  - Set to `0` for persistent notifications (must be dismissed manually)
+- Returns a unique ID that can be used to dismiss the notification programmatically
+
+## Duration Guide
+
+Each notification type has a default duration:
+
+- **Success**: 4000ms (4 seconds)
+- **Error**: 6000ms (6 seconds)
+- **Warning**: 5000ms (5 seconds)
+- **Info**: 4000ms (4 seconds)
+- **Loading**: Persistent (doesn't auto-dismiss)
+
+## Advanced Usage
+
+### Programmatic Dismissal
+
+For async operations, you can create persistent loading toasts and dismiss them when the operation completes:
+
+```tsx
+async function handleSubmit() {
+  // Create persistent loading notification
+  const loadingId = notify("Submitting form...", "loading", 0);
+  
+  try {
+    await submitForm();
+    // Remove loading notification
+    removeToast(loadingId);
+    // Show success notification
+    notify("Form submitted successfully", "success");
+  } catch (error) {
+    // Remove loading notification
+    removeToast(loadingId);
+    // Show error notification
+    notify("Error submitting form", "error");
+  }
+}
+```
+
+## Customization
+
+The toast components use Tailwind CSS for styling. You can customize the appearance by modifying the Toast component or overriding the CSS classes.
+
+## Browser Support
+
+- Chrome, Firefox, Safari, and Edge (latest 2 versions)
+- Internet Explorer is not supported
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Built with [React](https://reactjs.org/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Created with [Vite](https://vitejs.dev/)
