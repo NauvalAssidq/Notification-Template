@@ -5,10 +5,11 @@ type ToastItem = {
   id: string;
   message: string;
   type: ToastType;
+  duration?: number;
 };
 
 type ToastContextType = {
-  notify: (message: string, type: ToastType) => void;
+  notify: (message: string, type: ToastType, duration?: number) => void;
 };
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -26,20 +27,29 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }, []);
 
-  const notify = useCallback((message: string, type: ToastType) => {
+  const notify = useCallback((message: string, type: ToastType, duration = 4000) => {
     const id = Date.now().toString();
-    setToasts((prev) => [...prev, { id, message, type }]);
-    setTimeout(() => removeToast(id), 4000);
+    setToasts((prev) => [...prev, { id, message, type, duration }]);
+    
+    if (duration > 0) {
+      setTimeout(() => removeToast(id), duration);
+    }
   }, [removeToast]);
 
   return (
     <ToastContext.Provider value={{ notify }}>
       {children}
-      <div className="fixed top-4 right-4 flex flex-col gap-4 z-50">
+      <div className="fixed top-4 right-4 flex flex-col gap-4 z-[9999]">
         {toasts.map((toast) => (
-          <Toast key={toast.id} {...toast} onClose={removeToast} />
+          <Toast 
+            key={toast.id} 
+            {...toast} 
+            onClose={removeToast} 
+            timeout={toast.duration}
+          />
         ))}
       </div>
     </ToastContext.Provider>
   );
 };
+
