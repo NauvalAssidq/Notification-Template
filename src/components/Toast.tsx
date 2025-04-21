@@ -1,0 +1,55 @@
+import React from "react";
+
+export type ToastType = "success" | "error";
+
+interface ToastProps {
+  id: string;
+  message: string;
+  type: ToastType;
+  onClose: (id: string) => void;
+}
+
+const variantStyles = {
+  success: "border-emerald-600 bg-emerald-500/95 backdrop-blur-sm",
+  error: "border-rose-600 bg-rose-500/95 backdrop-blur-sm",
+};
+
+const toastIcons = {
+  success: (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+      <path fill="none" d="M0 0h24v24H0z"/>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+    </svg>
+  ),
+  error: (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+      <path fill="none" d="M0 0h24v24H0z"/>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+    </svg>
+  ),
+};
+
+export const Toast: React.FC<ToastProps> = ({ id, message, type, onClose }) => {
+  return (
+    <div
+      role="alert"
+      className={`${variantStyles[type]} text-white min-w-[280px] max-w-sm px-4 py-3 rounded-xl shadow-lg
+        border-l-4 flex items-center gap-3 animate-toast-pop transition-all duration-300
+        hover:shadow-md transform hover:-translate-y-1 motion-reduce:transition-none`}
+    >
+      <div className="flex-shrink-0">
+        {toastIcons[type]}
+      </div>
+      <span className="flex-1 text-sm font-medium leading-tight">{message}</span>
+      <button
+        onClick={() => onClose(id)}
+          className="flex-shrink-0 bg-transparent rounded-full p-1 text-white hover:bg-white/10 transition-colors focus:outline-transparent focus:ring-white/50"
+        aria-label="Close toast"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+        </svg>
+      </button>
+    </div>
+  );
+};
