@@ -11,12 +11,37 @@ function HomePage() {
     <div className="w-full min-h-screen bg-white text-base">
       <main className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-12">
         {/* Hero Section */}
-        <section className="flex flex-col items-center my-12 sm:my-24">
-          <div className="inline-flex items-center justify-center border border-emerald-200 px-4 py-1 rounded-full text-xs sm:text-sm text-emerald-700 mb-6">
-            <span className="font-medium">v0.0.1</span>
-            <div className="w-1 h-1 mx-2 bg-emerald-300 rounded-full" />
-            <span>Now Available</span>
-          </div>
+        <section className="flex flex-col items-center my-2 sm:my-6">
+        <div className="inline-flex items-center justify-center border border-emerald-200 bg-white/80 backdrop-blur-sm px-4 py-1 rounded-full text-xs sm:text-sm text-emerald-700 mb-6 
+            hover:shadow-md hover:border-emerald-300 hover:scale-[1.02] 
+            transition-all duration-300 cursor-pointer group relative
+            animate-fade-in-up"
+            role="status"
+            aria-label="Version Badge">
+            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 
+                bg-gradient-to-r from-emerald-100/30 to-transparent transition-opacity duration-300" />
+            
+            <span className="font-medium transition-transform duration-300 group-hover:-translate-y-px">
+                v0.0.1
+            </span>
+            
+            <div className="w-1 h-1 mx-2 bg-emerald-300 rounded-full 
+                animate-pulse group-hover:animate-ping" />
+            
+            <span className="transition-all duration-300 group-hover:text-emerald-800">
+                Now Available
+            </span>
+
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 
+                group-hover:opacity-100 transition-opacity duration-200">
+                <div className="bg-emerald-600 text-white text-xs px-3 py-1.5 rounded-lg 
+                shadow-lg whitespace-nowrap">
+                Latest stable release
+                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 
+                    bg-emerald-600 rotate-45" />
+                </div>
+            </div>
+        </div>
 
           <h1 className="text-3xl sm:text-4xl text-center font-bold text-gray-900 mb-4">
             Toast Notification System
@@ -103,7 +128,7 @@ function HomePage() {
         </section>
 
         {/* Demo Section */}
-        <section id="demo" className="mb-16 border border-gray-200 rounded-xl p-4 sm:p-6">
+        <section id="demo" className="mb-16 border border-gray-200 rounded-xl p-4 sm:p-6 mx-4">
           <h2 className="text-xl sm:text-2xl text-gray-800 font-semibold mb-6 flex items-center">
             <span className="material-icons-outlined text-emerald-500 mr-2">add_circle</span>
             Interactive Demo
@@ -209,7 +234,7 @@ function HomePage() {
         </section>
 
         {/* Code Section */}
-        <section className="mb-12">
+        <section className="mb-12 mx-4">
           <h2 className="text-xl sm:text-2xl font-semibold mb-4 flex items-center">
             <span className="material-icons-outlined text-emerald-500 mr-2">code</span>
             Implementation
@@ -258,19 +283,17 @@ function YourComponent() {
             </pre>
           </div>
 
-          <div className="mt-6 text-sm sm:text-base text-gray-500">
-            <p className="flex items-start gap-2">
-              <span className="material-icons-outlined text-emerald-500 mt-0.5 text-base">check_circle</span>
-              <span>
-                The toast system automatically stacks notifications and handles queuing for smooth user experience.
-              </span>
-            </p>
-            <p className="flex items-start gap-2 mt-2">
-              <span className="material-icons-outlined text-emerald-500 mt-0.5 text-base">check_circle</span>
-              <span>
-                For TypeScript projects, the available toast types are: 'success', 'error', 'warning', 'info', and 'loading'.
-              </span>
-            </p>
+          <div className="mt-6 text-gray-500">
+            <ul className="mt-3 space-y-1">
+                <li className="flex items-center text-base text-gray-500">
+                <span className="material-icons-outlined text-sm text-emerald-500 mr-2">check_circle</span>
+                <span>The toast system automatically stacks notifications and handles queuing for smooth user experience.</span>
+                </li>
+                <li className="flex items-center text-base text-gray-500">
+                <span className="material-icons-outlined text-sm text-emerald-500 mr-2">check_circle</span>
+                <span>For TypeScript projects, the available toast types are: 'success', 'error', 'warning', 'info', and 'loading'.</span>
+                </li>
+            </ul>
           </div>
         </section>
 

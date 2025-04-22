@@ -11,11 +11,11 @@ export type ToastProps = {
 }
 
 const variantStyles = {
-  success: "bg-emerald-500/95 backdrop-blur-sm",
-  error: "bg-rose-500/95 backdrop-blur-sm",
-  warning: "bg-amber-500/95 backdrop-blur-sm",
-  info: "bg-sky-500/95 backdrop-blur-sm",
-  loading: "bg-gray-500/95 backdrop-blur-sm",
+  success: "bg-green-600/95 backdrop-blur-sm",
+  error: "bg-red-600/95 backdrop-blur-sm",
+  warning: "bg-yellow-600/95 backdrop-blur-sm",
+  info: "bg-blue-600/95 backdrop-blur-sm",
+  loading: "bg-gray-600/95 backdrop-blur-sm",
 };
 
 const toastIcons = {
@@ -55,9 +55,9 @@ export const Toast: React.FC<ToastProps> = ({ id, message, type, onClose }) => {
   return (
     <div
       role="alert"
-      className={`${variantStyles[type]} text-white min-w-[280px] max-w-sm px-4 py-3 rounded-xl shadow-lg
-        border-l-4 flex items-center gap-3 animate-toast-pop transition-all duration-300
-        hover:shadow-md transform hover:-translate-y-1 motion-reduce:transition-none
+      className={`${variantStyles[type]} text-white min-w-[280px] max-w-sm px-4 py-3 rounded-xl shadow-md
+        flex items-center gap-3 animate-toast-pop transition-all duration-300
+        hover:shadow-sm transform hover:-translate-y-1 motion-reduce:transition-none
         group relative overflow-hidden`}>
       <div className="flex-shrink-0">
         {toastIcons[type]}
