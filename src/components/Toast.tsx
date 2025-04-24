@@ -11,11 +11,11 @@ export type ToastProps = {
 }
 
 const variantStyles = {
-  success: "bg-green-600/95 backdrop-blur-sm",
-  error: "bg-red-600/95 backdrop-blur-sm",
-  warning: "bg-yellow-600/95 backdrop-blur-sm",
-  info: "bg-blue-600/95 backdrop-blur-sm",
-  loading: "bg-gray-600/95 backdrop-blur-sm",
+  success: "border-2 border-green-700 bg-green-600/85 backdrop-blur-sm",
+  error: "border-2 border-red-700 bg-red-600/95 backdrop-blur-sm",
+  warning: "border-2 border-yellow-700 bg-yellow-600/95 backdrop-blur-sm",
+  info: "border-2 border-blue-700 bg-blue-600/95 backdrop-blur-sm",
+  loading: "border-2 border-gray-700 bg-gray-600/95 backdrop-blur-sm",
 };
 
 const toastIcons = {
@@ -55,7 +55,7 @@ export const Toast: React.FC<ToastProps> = ({ id, message, type, onClose }) => {
   return (
     <div
       role="alert"
-      className={`${variantStyles[type]} text-white min-w-[280px] max-w-sm px-4 py-3 rounded-xl shadow-md
+      className={`${variantStyles[type]} text-white min-w-[280px] max-w-sm px-4 py-3 rounded-md shadow-md
         flex items-center gap-3 animate-toast-pop transition-all duration-300
         hover:shadow-sm transform hover:-translate-y-1 motion-reduce:transition-none
         group relative overflow-hidden`}>
