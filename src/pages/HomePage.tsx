@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useToast } from "../components/ToastProvider";
 import { ToastType } from "../components/Toast";
+import "./HomePage.css"
 
 function HomePage() {
   const { notify } = useToast();
