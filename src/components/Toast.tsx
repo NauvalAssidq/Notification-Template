@@ -55,10 +55,11 @@ export const Toast: React.FC<ToastProps> = ({ id, message, type, onClose }) => {
   return (
     <div
       role="alert"
-      className={`${variantStyles[type]} text-white min-w-[280px] max-w-sm px-4 py-3 rounded-md shadow-md
+      className={`${variantStyles[type]} text-white px-4 py-3 rounded-lg shadow-md
         flex items-center gap-3 animate-toast-pop transition-all duration-300
         hover:shadow-sm transform hover:-translate-y-1 motion-reduce:transition-none
-        group relative overflow-hidden`}>
+        group relative overflow-hidden w-fit max-w-[90vw]`}
+      >
       <div className="flex-shrink-0">
         {toastIcons[type]}
       </div>
