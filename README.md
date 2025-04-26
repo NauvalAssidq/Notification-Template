@@ -1,8 +1,6 @@
-# Toast Notification Library
+# Toast-Notif, Notoastui
 
 A lightweight, customizable toast notification system for React applications with TypeScript support.
-
-![Toast notifications demo](https://via.placeholder.com/800x400.png?text=Toast+Notifications+Demo)
 
 ## Features
 
